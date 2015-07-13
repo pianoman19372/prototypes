@@ -58,8 +58,8 @@ bootstrap:
 	knife node environment_set studio9 production
 
 upload:
-	#knife environment from file environments/*.rb
-	#knife role from file roles/*.rb
+	knife environment from file environments/*.rb
+	knife role from file roles/*.rb
 	knife cookbook upload ubuntu-essentials
 
 # this target is used to reset the chefserver
