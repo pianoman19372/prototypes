@@ -1,0 +1,41 @@
+{
+  "name": "ubuntu-essentials",
+  "description": "Installs/Configures ubuntu-essentials",
+  "long_description": "Ubuntu Essentials\n=================\n\n\n\n",
+  "maintainer": "Edward Long",
+  "maintainer_email": "pianoman19372@nospam.example.com",
+  "license": "All rights reserved",
+  "platforms": {
+
+  },
+  "dependencies": {
+
+  },
+  "recommendations": {
+
+  },
+  "suggestions": {
+
+  },
+  "conflicting": {
+
+  },
+  "providing": {
+
+  },
+  "replacing": {
+
+  },
+  "attributes": {
+
+  },
+  "groupings": {
+
+  },
+  "recipes": {
+
+  },
+  "version": "0.1.0",
+  "source_url": "",
+  "issues_url": ""
+}

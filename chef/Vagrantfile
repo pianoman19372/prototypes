@@ -1,0 +1,28 @@
+Vagrant.configure(2) do |config|
+
+    config.vm.synced_folder "/storage", "/storage"
+
+    config.vm.define :'chefserver' do |node|
+        node.vm.box = "trusty64"
+        node.vm.box_url = "file:///storage/git/vagrant/boxes/#{node.vm.box}.box"
+        node.vm.network :forwarded_port, guest: 22, host: 2302
+        node.vm.network :private_network, ip: "192.168.1.2"
+        node.vm.hostname = "chefserver"
+        node.vm.provision "shell", inline: "cd /vagrant; make install-server"
+        node.vm.provider :virtualbox do |vb|
+            vb.customize ["modifyvm", :id, "--name", "chefserver", "--memory", "8192", "--cpus", 4]
+        end
+    end
+
+    #config.vm.define :'chefclient' do |node|
+    #    node.vm.box = "trusty64"
+    #    node.vm.box_url = "file:///storage/git/vagrant/boxes/#{node.vm.box}.box"
+    #    node.vm.network :forwarded_port, guest: 22, host: 2311
+    #    node.vm.network :private_network, ip: "192.168.1.11"
+    #    node.vm.hostname = "chefclient"
+    #    node.vm.provision "shell", inline: "cd /vagrant; make install-chef-client"
+    #    node.vm.provider :virtualbox do |vb|
+    #        vb.customize ["modifyvm", :id, "--name", "chefclient", "--memory", "512", "--cpus", 1]
+    #    end
+    #end
+end

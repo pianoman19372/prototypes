@@ -1,0 +1,14 @@
+! Managed by chef
+! * http://www.x.org/archive/X11R6.8.2/doc/xmodmap.1.html
+! * https://wiki.archlinux.org/index.php/Xmodmap
+
+! disable the middle scroll wheel paste clipboard function
+!    (safety issue: accidently pasting into terminals is full of fail)
+pointer = 1 25 3 4 5 6 7 8 9
+
+! remap windows key (or command key on apple keyboards) to control
+!   (it would be nice to make this control+shift, but i havent got
+!    that figured out yet  (for feature parity with MacOSX)
+remove mod4 = Super_L
+keysym Super_L = Control_L
+add Control = Control_L

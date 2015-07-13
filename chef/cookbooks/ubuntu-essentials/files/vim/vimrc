@@ -1,0 +1,122 @@
+call pathogen#infect()
+
+" Base Options
+set nocompatible            " Get rid of Vi compatibility mode. SET FIRST!
+set isk+=_,$,@,%,#,-        " Make these characters count as part of a word.
+set viminfo+=!              " Make sure we can save viminfo.
+set ignorecase              " Ignore case in searches
+set laststatus=2            " Keep status line one
+set mouse=v                 " put mouse in 'v' mode (mid click copy+paste)
+
+" UI Themes and colors
+syntax on                   " syntax checking
+set ruler                   " show info bar on bottom row
+set noerrorbells            " disable visual bells
+set visualbell t_vb=        " disable bells
+set number                  " show line numbers
+set t_Co=256                " enable 256 colors
+set wildmenu                " enable wildmenu   Enter :e  in the command line and press ^D.
+
+" Visual Cues
+set showmatch               " show matching braces and brackets
+set mat=2                   " 1/10's of a second to show match
+set nohlsearch              " dont highlight searches
+set incsearch               " highlight searches as you type them
+set hidden                  " allow buffer nav without save
+
+" Text formatting/layout
+set tabstop=4               " tabspacing
+set softtabstop=4           " unify?
+set shiftwidth=4            " indent by 4 spaces
+set shiftround              " indent to nearest tabstop
+set expandtab               " use spaces instead of tabs
+set foldlevel=10            " disable code folding
+
+" GUI vim options
+if has("gui_running")
+   let g:Powerline_symbols = 'fancy' 
+   set guioptions-=T        " no : toolbar
+   set guioptions-=e        " no : toolbar
+   set guioptions-=m        " no : menu
+   set guioptions+=a        " yes: autoselect
+   set guicursor=a:blinkon0 " set blinking cursor
+   set list listchars=tab:»·,trail:·
+   set showtabline=0        " remove tab line from top of vim
+   winpos 0 0               " set window position
+   winsize 130 55
+   colorscheme desert256    " enable desert256
+   " set guifont=Monaco:h14   " set vi font to Monaco 14pt
+   " set transparency=50      " set transparancy to 8%
+else
+   colorscheme desert  " enable desert
+endif
+
+" Syntax highlighting
+filetype on
+filetype plugin indent on
+
+autocmd BufRead *.thtml      set filetype=php
+autocmd BufRead *.html       set filetype=php
+autocmd BufRead *.htm        set filetype=php
+autocmd BufRead *.ctp        set filetype=php
+autocmd BufRead *.zcml       set filetype=xml
+autocmd BufRead *.inc        set filetype=Make
+autocmd BufRead *.pm         set filetype=perl
+autocmd BufRead *.rb         set filetype=ruby
+autocmd BufRead *.pp         set filetype=ruby
+autocmd BufRead Vagrantfile  set filetype=ruby
+autocmd BufRead *.t          set filetype=perl
+autocmd BufRead *.py         set filetype=python
+autocmd BufRead *.mako       set filetype=python
+
+map <C-Left> <Esc>:bp<CR>
+map <C-Right> <Esc>:bn<CR>
+
+" make yank use system clipboard
+set clipboard=unnamed
+
+vmap <C-c> "+yi
+vmap <C-x> "+c
+vmap <C-v> c<ESC>"+p
+imap <C-v> <C-r><C-o>+
+
+"map <T-c> <Esc>:bp<CR>
+"map <T-v> <Esc>:bn<CR>
+
+
+"map <C-c> <Esc>:y<cr>
+"map <C-v> <Esc>:p<cr>
+
+
+"vnoremap <C-x> "*dd
+"vnoremap <C-c> "*y
+"vnoremap <C-v> "*p
+"
+
+" copy+paste stuff
+" vmap <C-c> y:call system("xclip -i -selection clipboard", getreg("\""))<CR>:call system("xclip -i", getreg("\""))<CR>
+" nmap <C-v> :call setreg("\"",system("xclip -o -selection clipboard"))<CR>p
+
+cd /storage/git
+
+" Syntastic
+" if has("gui_running")
+"     SyntasticEnable php
+"     SyntasticEnable javascript
+"     SyntasticEnable xhtml
+"     SyntasticEnable python
+"     let g:syntastic_enable_signs=1        " Enable marks on side if errors.
+"     let g:syntastic_auto_loc_list=0       " Turn off loc list coming up automatically.
+"     let g:syntastic_quiet_warnings=1     " Turn off warn msgs, doesn't work
+"     let g:syntastic_auto_jump=1           " Jump to errors.
+" endif
+
+" Remove trailing whitespace from programming scripts
+autocmd FileType python autocmd BufWritePre <buffer> :call setline(1,map(getline(1,"$"),'substitute(v:val,"\\s\\+$","","")'))
+autocmd FileType perl autocmd BufWritePre <buffer> :call setline(1,map(getline(1,"$"),'substitute(v:val,"\\s\\+$","","")'))
+autocmd FileType php autocmd BufWritePre <buffer> :call setline(1,map(getline(1,"$"),'substitute(v:val,"\\s\\+$","","")'))
+autocmd FileType java autocmd BufWritePre <buffer> :call setline(1,map(getline(1,"$"),'substitute(v:val,"\\s\\+$","","")'))
+autocmd FileType ruby autocmd BufWritePre <buffer> :call setline(1,map(getline(1,"$"),'substitute(v:val,"\\s\\+$","","")'))
+autocmd FileType tcl autocmd BufWritePre <buffer> :call setline(1,map(getline(1,"$"),'substitute(v:val,"\\s\\+$","","")'))
+
+
